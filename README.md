@@ -67,3 +67,15 @@ regressions, plus permission tests with both `default_permissions` and
 `defer_permissions`. `brew test`, audit and style checks pass. The private recovery
 mode bypasses permission bits; strict mode denies foreign private files and blocked
 file/directory access. Cross-user access and Linux ACL equivalence are not certified.
+
+Version 0.2.2 corrects huge-file allocation counts, rejects unrepresentable stat sizes,
+and includes large sparse-file/legacy-indirect/deep-extent regression coverage. It uses
+validated sparse gap lengths and table-based CRC32C. The reader's allocation callback
+matches debugfs, but macFUSE 5.4.0 derives mounted stat/du allocation from logical size
+([upstream issue #1121](https://github.com/macfuse/macfuse/issues/1121)). This provider
+limitation remains; sparse-copy tests explicitly skip zero chunks.
+
+The installed 0.2.2 package passes `brew test`, formula audit/style checks, and the
+mounted path/ownership/strict-permission smoke test on Intel Sequoia. The source's
+89 large-file checks pass with sanitizers for both FUSE APIs; Linux CI covers them
+alongside checksum, corruption, ownership and normal-image regressions.

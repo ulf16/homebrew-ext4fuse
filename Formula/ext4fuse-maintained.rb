@@ -19,9 +19,9 @@ end
 class Ext4fuseMaintained < Formula
   desc "Read-only ext4 filesystem reader with metadata validation"
   homepage "https://github.com/ulf16/ext4fuse"
-  url "https://github.com/ulf16/ext4fuse/archive/2f98ecd864ca15f2bb52dd82869ce2de611c14e9.tar.gz"
-  version "0.2.1"
-  sha256 "862dc78ee1c2d771d00054931f323d42ed14447b36e5154e59048f8a74417880"
+  url "https://github.com/ulf16/ext4fuse/archive/dd8c05f0553cca0f66354227e2d34b1971eaa730.tar.gz"
+  version "0.2.2"
+  sha256 "87b4d670dd674258d4719113213a1b5dee82fc126984b00a40dacee7f2d33871"
   license "GPL-2.0-only"
 
   # macFUSE installs its development files outside Homebrew's managed prefix.
@@ -46,6 +46,7 @@ class Ext4fuseMaintained < Formula
       Mount with: ext4fuse-maintained /dev/diskNsM /path/to/mountpoint -s -o ro,default_permissions
       Linux UID/GID values are preserved. Recovery option defer_permissions bypasses mode checks.
       macFUSE must be installed and approved for mounts to work.
+      macFUSE may report logical allocation for sparse files in mounted stat/du output.
       Validated on Intel macOS Sequoia; Apple Silicon is not yet tested.
     EOS
   end
