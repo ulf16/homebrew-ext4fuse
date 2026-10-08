@@ -29,8 +29,13 @@ The command is `ext4fuse-maintained`. This package can coexist with Homebrew's o
 Unmount the ext4 partition first. Replace both placeholders with real paths:
 
 ```sh
-ext4fuse-maintained /dev/diskNsM /path/to/mountpoint -s -o ro,defer_permissions
+ext4fuse-maintained /dev/diskNsM /path/to/mountpoint -s -o ro,default_permissions
 ```
+
+This enforces the reported numeric Linux UID/GID and mode bits. Foreign Linux private
+files may therefore be inaccessible to your macOS account. For deliberate recovery,
+`defer_permissions` bypasses kernel mode checks; the reader does not enforce them itself.
+Keep recovery mounts private. Linux ACLs are not implemented.
 
 Unmount using `umount /path/to/mountpoint`. Raw-device access can require `sudo`.
 The reader rejects unsupported ext4 layouts and filesystems needing journal replay.
@@ -55,3 +60,10 @@ Version 0.2.0 was built from source and installed with Homebrew on Intel macOS
 The installed executable also passed a disposable-image macFUSE mount test:
 exact contents, a 255-byte filename, missing-path handling, and write rejection.
 The original `/usr/local/bin/ext4fuse` remained unchanged.
+
+Version 0.2.1 preserves full Linux UID/GID values and reports inode numbers. Its
+installed command passes hidden-directory, repeated-missing-path and colon-filename
+regressions, plus permission tests with both `default_permissions` and
+`defer_permissions`. `brew test`, audit and style checks pass. The private recovery
+mode bypasses permission bits; strict mode denies foreign private files and blocked
+file/directory access. Cross-user access and Linux ACL equivalence are not certified.
