@@ -47,3 +47,11 @@ brew uninstall ulf16/ext4fuse/ext4fuse-maintained
 ```
 
 Uninstalling this package does not uninstall macFUSE or the older ext4fuse.
+
+## Packaging validation
+
+Version 0.2.0 was built from source and installed with Homebrew on Intel macOS
+15.8.1 using macFUSE 5.4.0. `brew test`, formula audit, and style checks pass.
+The installed executable also passed a disposable-image macFUSE mount test:
+exact contents, a 255-byte filename, missing-path handling, and write rejection.
+The original `/usr/local/bin/ext4fuse` remained unchanged.

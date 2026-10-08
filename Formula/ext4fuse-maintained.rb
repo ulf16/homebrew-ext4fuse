@@ -29,8 +29,8 @@ class Ext4fuseMaintained < Formula
 
   depends_on "pkgconf" => :build
   depends_on "e2fsprogs" => :test
-  depends_on macos: :sequoia
   depends_on Macfuse3Requirement
+  depends_on macos: :sequoia
 
   def install
     ENV.prepend_path "PKG_CONFIG_PATH", "/usr/local/lib/pkgconfig"
