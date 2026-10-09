@@ -128,3 +128,16 @@ Both FUSE APIs pass 1,012 EA checks with sanitizers and the existing portable su
 Linux CI passes for both APIs. Homebrew test, strict audit and style checks pass.
 Installed 0.2.6 passes mounted 64 KiB binary retrieval, empty and symlink attributes,
 Linux ACL metadata, write rejection and timestamp/path regressions on Intel Sequoia.
+
+Version 0.2.7 adds `largedir` compatibility, including three-level htrees. It validates
+index headers, exact counts/capacities, hash ordering and 28-bit child bounds even
+without metadata checksums. Directory sizes and resumed listing cursors retain
+64-bit offsets. Lookup and enumeration continue to use linear scans.
+
+Both FUSE APIs pass all portable sanitizer suites, including 441 new largedir checks
+across block/checksum variants, fsck-certified deeper trees, complete/paged listings,
+repaired-checksum corruption and separate synthetic cursors beyond 4 GiB. Both APIs
+pass native three-level mounts. Installed 0.2.7 passes mounted complete 1,100-name
+listings, lookups, write rejection and existing EA/xattr, timestamp and path regressions.
+Linux CI passes for both APIs; Homebrew test, strict audit and style checks pass.
+Multi-gigabyte populated directories are not tested; existing limitations remain.
