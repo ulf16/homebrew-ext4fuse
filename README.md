@@ -79,3 +79,15 @@ The installed 0.2.2 package passes `brew test`, formula audit/style checks, and 
 mounted path/ownership/strict-permission smoke test on Intel Sequoia. The source's
 89 large-file checks pass with sanitizers for both FUSE APIs; Linux CI covers them
 alongside checksum, corruption, ownership and normal-image regressions.
+
+Version 0.2.3 preserves high physical address words for extent data, external extent
+nodes and inode tables, plus the 64-bit filesystem block count. It also reads Linux
+inline files and both inline-directory regions using bounded inode-body attributes.
+Descriptor memory limits and rejection of meta_bg/other unsupported layouts remain.
+No journal replay, write support, Linux ACLs or macFUSE stat/du allocation fix is added.
+
+Both FUSE APIs pass all portable suites with sanitizers, including 817 inline checks
+and optional high-address fixtures using real 16 TiB sparse geometry with explicit
+metadata/data relocations. Linux CI passes for both APIs. Installed 0.2.3 passes
+Homebrew test/audit/style checks, mounted inline reads and directory listing, symlinks,
+write rejection, and the existing strict-permission/path regressions on Intel Sequoia.
