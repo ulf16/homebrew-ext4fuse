@@ -116,3 +116,15 @@ behavior and malformed metadata with repaired checksums. Linux CI passes for bot
 Installed 0.2.5 passes Homebrew test/audit/style and mounted native xattr retrieval,
 symlink attributes, binary/empty values, write rejection, exact timestamp/meta_bg/inline
 verification and strict path/permission regressions on Intel Sequoia/macFUSE 5.4.0.
+
+Version 0.2.6 adds validated read-only `ea_inode` values up to 64 KiB, including
+shared values and attributes on inline files. It verifies EA inode state, references,
+metadata checksums, value hashes and complete payloads; internal EA inodes cannot
+be opened through directory entries. Legacy unhashed Lustre EA layouts remain
+unsupported. Read-only access and the existing ACL enforcement and sparse allocation
+limitations remain.
+
+Both FUSE APIs pass 1,012 EA checks with sanitizers and the existing portable suites.
+Linux CI passes for both APIs. Homebrew test, strict audit and style checks pass.
+Installed 0.2.6 passes mounted 64 KiB binary retrieval, empty and symlink attributes,
+Linux ACL metadata, write rejection and timestamp/path regressions on Intel Sequoia.
