@@ -141,3 +141,23 @@ pass native three-level mounts. Installed 0.2.7 passes mounted complete 1,100-na
 listings, lookups, write rejection and existing EA/xattr, timestamp and path regressions.
 Linux CI passes for both APIs; Homebrew test, strict audit and style checks pass.
 Multi-gigabyte populated directories are not tested; existing limitations remain.
+
+Version 0.2.8 verifies physical-device capacity using native macOS/Linux/FreeBSD
+queries and handles aligned metadata/payload reads from macOS/FreeBSD raw character
+devices. Undersized inputs, failed queries and invalid/overflowed capacities are refused.
+Native macOS block/raw-image and Linux read-only loop-device tests pass; FreeBSD native
+device validation remains open.
+
+Filename lookup now binary-searches checked htree nodes using all six ext4 hash
+variants and follows collision continuations across leaf/index boundaries. Linear
+and inline directories retain their existing paths; enumeration stays linear/paged.
+Test instrumentation measures 3–4 directory-block reads for a miss versus 162–163
+with linear lookup on the 1,100-name fixture, without adding production test counters.
+The suites compare 8,640 hashes with libext2fs, check 6,633 indexed lookup/reference/
+performance cases and 72 actual collision cases on fsck-certified fixtures.
+
+Installed 0.2.8 passes raw-device macFUSE listing/lookup/contents and EROFS tests, existing
+EA/xattr, timestamp and path regressions, and Homebrew test/strict-audit/style checks.
+Both FUSE APIs pass all local sanitizer suites and native raw-device mounts.
+Linux CI passes for both FUSE APIs. Existing read-only, journal, ACL enforcement and
+platform limitations remain; indexed lookup validates metadata as it is read.
