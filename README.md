@@ -91,3 +91,15 @@ and optional high-address fixtures using real 16 TiB sparse geometry with explic
 metadata/data relocations. Linux CI passes for both APIs. Installed 0.2.3 passes
 Homebrew test/audit/style checks, mounted inline reads and directory listing, symlinks,
 write rejection, and the existing strict-permission/path regressions on Intel Sequoia.
+
+Version 0.2.4 corrects signed and extended timestamp seconds, preserves nanoseconds,
+and exposes stored creation time as macOS birthtime. It also accepts meta_bg layouts
+with checked distributed primary descriptors, sparse-super variants and mixed early
+classic placement. Descriptor checksums, inode bounds and resource limits remain.
+
+Both FUSE APIs pass the full sanitizer suites, including 53 timestamp and 108 meta_bg
+checks; Linux CI passes for both. Installed 0.2.4 passes Homebrew test/audit/style checks
+and mounted native-stat verification of exact seconds/nanoseconds for all four time
+fields, combined meta_bg/inline contents, and strict path/permission regressions.
+Read-only access, no journal replay, unexposed Linux ACLs and the macFUSE sparse stat/du
+allocation limitation remain.
