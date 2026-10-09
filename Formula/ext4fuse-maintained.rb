@@ -19,9 +19,9 @@ end
 class Ext4fuseMaintained < Formula
   desc "Read-only ext4 filesystem reader with metadata validation"
   homepage "https://github.com/ulf16/ext4fuse"
-  url "https://github.com/ulf16/ext4fuse/archive/edcbceb733768aee78930e6002fe9004ca1dddb7.tar.gz"
-  version "0.2.9"
-  sha256 "9f45fdf007d7f2ef76cf67327f9fdd9124a37073daa6b9edaa75d251d81c8af9"
+  url "https://github.com/ulf16/ext4fuse/archive/42512fbb8fe193495c12e40f524695817c880205.tar.gz"
+  version "0.2.10"
+  sha256 "5dbf5669fa2577eb433fb5906983be48ad05f64154538f8107322194e56d4e1b"
   license "GPL-2.0-only"
 
   # macFUSE installs its development files outside Homebrew's managed prefix.
@@ -36,7 +36,7 @@ class Ext4fuseMaintained < Formula
     ENV.prepend_path "PKG_CONFIG_PATH", "/usr/local/lib/pkgconfig"
     system "make", "FUSE_API=3", "VERSION=#{version}", "MACOSX_DEPLOYMENT_TARGET=15.0"
     bin.install "ext4fuse" => "ext4fuse-maintained"
-    doc.install "README.md", "VALIDATION.md", "COPYING"
+    doc.install "README.md", "VALIDATION.md", "BENCHMARKS.md", "COPYING", "benchmarks"
   end
 
   def caveats

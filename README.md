@@ -173,3 +173,16 @@ Both FUSE APIs pass 129 statistics/reference/error checks and high-counter bound
 checks with sanitizers, plus native mounted `statvfs`/`df` checks on Intel Sequoia.
 Installed 0.2.9 passes that mounted check, Homebrew test, strict audit and style checks.
 Disposable images remain unchanged and test mounts are removed.
+
+Version 0.2.10 adds reproducible bulk-read profiling and bounded classic block-map
+coalescing. The 64 MiB fixture with 64 KiB reader requests drops from 49,128 to
+4,077 preads, with about 3.5 times the measured warm-cache reader throughput.
+The installed package includes BENCHMARKS.md and raw measurement JSON. The tested
+macFUSE mount path still uses 4 KiB callbacks; no mounted speedup is promised.
+
+Both APIs pass 519 new mapping/content/error checks and affected reader suites
+with sanitizers locally. Full Linux CI passes for both APIs and compares warm
+raw, userspace reader, libext2fs and native ext4 reads using disposable read-only
+loop mounts. Installed 0.2.10 passes Homebrew test, strict audit/style, native bulk
+content checks, space reporting and strict/recovery path-permission smoke tests.
+Native FreeBSD throughput/crash reproduction remains open.
