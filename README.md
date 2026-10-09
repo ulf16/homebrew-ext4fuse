@@ -103,3 +103,16 @@ and mounted native-stat verification of exact seconds/nanoseconds for all four t
 fields, combined meta_bg/inline contents, and strict path/permission regressions.
 Read-only access, no journal replay, unexposed Linux ACLs and the macFUSE sparse stat/du
 allocation limitation remain.
+
+Version 0.2.5 adds read-only extended-attribute listing and retrieval for inode-body
+and external-block storage. Binary and empty values retain their Linux namespace
+names; internal system.data is hidden. Ext4 POSIX ACLs are converted to Linux userspace
+xattr encoding and exposed as metadata. Linux ACL/capability/SELinux enforcement,
+Finder namespace translation and ea_inode-backed large values are not added.
+
+Both FUSE APIs pass all portable sanitizer suites, including 1,285 new xattr checks
+across block/inode sizes and checksum variants, debugfs comparisons, API size/error
+behavior and malformed metadata with repaired checksums. Linux CI passes for both APIs.
+Installed 0.2.5 passes Homebrew test/audit/style and mounted native xattr retrieval,
+symlink attributes, binary/empty values, write rejection, exact timestamp/meta_bg/inline
+verification and strict path/permission regressions on Intel Sequoia/macFUSE 5.4.0.
