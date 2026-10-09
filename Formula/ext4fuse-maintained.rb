@@ -19,9 +19,9 @@ end
 class Ext4fuseMaintained < Formula
   desc "Read-only ext4 filesystem reader with metadata validation"
   homepage "https://github.com/ulf16/ext4fuse"
-  url "https://github.com/ulf16/ext4fuse/archive/8f39219e12e86841ba5ec29bfdd5540794aceb54.tar.gz"
-  version "0.2.8"
-  sha256 "0ac1ddb28725507e23ee3b2c0825dc0f19e34ed9a76260c206e977b2e5524d5c"
+  url "https://github.com/ulf16/ext4fuse/archive/edcbceb733768aee78930e6002fe9004ca1dddb7.tar.gz"
+  version "0.2.9"
+  sha256 "9f45fdf007d7f2ef76cf67327f9fdd9124a37073daa6b9edaa75d251d81c8af9"
   license "GPL-2.0-only"
 
   # macFUSE installs its development files outside Homebrew's managed prefix.

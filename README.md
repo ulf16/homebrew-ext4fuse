@@ -161,3 +161,15 @@ EA/xattr, timestamp and path regressions, and Homebrew test/strict-audit/style c
 Both FUSE APIs pass all local sanitizer suites and native raw-device mounts.
 Linux CI passes for both FUSE APIs. Existing read-only, journal, ACL enforcement and
 platform limitations remain; indexed lookup validates metadata as it is read.
+
+Version 0.2.9 adds filesystem space reporting for `df` and `statvfs`: source total,
+free and reserved-adjusted available blocks, inode counts and read-only state.
+Totals include metadata rather than subtracting Linux ext4's calculated overhead.
+Malformed counts fail instead of wrapping. NetBSD builds link `libexecinfo` to
+address upstream's missing-backtrace-library report; native NetBSD validation is
+still outstanding.
+
+Both FUSE APIs pass 129 statistics/reference/error checks and high-counter boundary
+checks with sanitizers, plus native mounted `statvfs`/`df` checks on Intel Sequoia.
+Installed 0.2.9 passes that mounted check, Homebrew test, strict audit and style checks.
+Disposable images remain unchanged and test mounts are removed.
