@@ -19,9 +19,9 @@ end
 class Ext4fuseWriter < Formula
   desc "Managed ext4 write mounts with explicit transaction recovery"
   homepage "https://github.com/ulf16/ext4fuse"
-  url "https://github.com/ulf16/ext4fuse/archive/0f92b32baf9a7a750247e57e0ce2cea0c36d1237.tar.gz"
-  version "0.3.0-beta.3"
-  sha256 "93fc5852db6a06e8681f2d29f166c65db0490f174ba21124e400e801fb7bb452"
+  url "https://github.com/ulf16/ext4fuse/archive/7e984d5f94783f4e87f7a7cab8879a21226b83fe.tar.gz"
+  version "0.3.0-beta.4"
+  sha256 "f8a3beb398f2958883c43c97d5bff5070f171a798b5b5de700b14385ae531a7b"
   license "GPL-2.0-only"
 
   env :std
