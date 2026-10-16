@@ -1,5 +1,8 @@
 # Homebrew tap for maintained ext4fuse
 
+This tap supplies two separate commands: the existing read-only
+`ext4fuse-maintained` and the experimental read-write beta `ext4fuse-writer`.
+
 Experimental read-only [ulf16/ext4fuse](https://github.com/ulf16/ext4fuse), packaged
 from a pinned source commit with a SHA-256 archive checksum. Builds locally;
 there are no prebuilt bottles. Requires macOS Sequoia or newer and macFUSE's FUSE 3
@@ -42,6 +45,48 @@ The reader rejects unsupported ext4 layouts and filesystems needing journal repl
 See the [reader documentation](https://github.com/ulf16/ext4fuse#readme) for feature
 limits and disposable-image tests. The formula test checks checksum rejection without
 mounting; successful installation does not verify macFUSE approval or a real disk.
+
+## Writable beta
+
+The separate writer formula packages the runtime and a managed mount/recovery CLI:
+
+```sh
+brew install ulf16/ext4fuse/ext4fuse-writer
+ext4fuse-writer doctor
+ext4fuse-writer init --image /path/to/linux.img "$HOME/ext4-state"
+mkdir -p "$HOME/ext4-mount"
+ext4fuse-writer mount "$HOME/ext4-state" "$HOME/ext4-mount"
+# In another terminal:
+ext4fuse-writer unmount "$HOME/ext4-state"
+```
+
+Image mode writes a managed copy, leaving the original image unchanged. Mounts run
+in the foreground and accept only the launching user's requests. Normal unmount
+waits for integrity checks and clean publication. After an interruption:
+
+```sh
+ext4fuse-writer status "$HOME/ext4-state" --json
+# Detach a stale attachment first, if status reports one:
+ext4fuse-writer unmount "$HOME/ext4-state"
+ext4fuse-writer recover "$HOME/ext4-state"
+```
+
+Device mode requires an explicitly selected offline partition and a durable state
+directory on another drive; mount and recovery must always name the matching device.
+It uses an external redo log without a full-size shadow. Preserve the entire state
+directory until recovery and clean publication complete. Do not unplug an active
+device or hand it to another filesystem driver while guarded. Full physical
+power-loss certification is still pending; this is a beta of the experimental
+write engine, not a declaration of complete Linux ext4 feature parity.
+
+Read the [complete writer workflow](https://github.com/ulf16/ext4fuse/blob/experimental/shared-libext2fs-writer/experimental/shared-writer/WORKFLOW.md)
+for device instructions, permissions, recovery, allocation commands and limits.
+The same guide and a man page are installed locally. Unmount before upgrading or
+uninstalling; Homebrew leaves all user state and images untouched. This formula
+coexists with the reader and does not change shell configuration or install services.
+It requires Homebrew Python and e2fsprogs; the launcher explicitly selects both,
+including keg-only tool paths. Existing dependency versions may need Homebrew's
+normal updates before `brew test` accepts its dependency preflight.
 
 ## Upgrade or remove
 
