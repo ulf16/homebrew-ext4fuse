@@ -231,3 +231,16 @@ raw, userspace reader, libext2fs and native ext4 reads using disposable read-onl
 loop mounts. Installed 0.2.10 passes Homebrew test, strict audit/style, native bulk
 content checks, space reporting and strict/recovery path-permission smoke tests.
 Native FreeBSD throughput/crash reproduction remains open.
+
+
+## Writer durability qualification
+
+Writer beta 2 adds seeded mixed-transaction endurance, 22 process-crash boundaries
+per filesystem profile, reported EIO/ENOSPC and short/torn-write faults, simulated
+loss/tearing of unflushed disposable-device sectors, and two concurrent mounted
+writers with externally recorded fsync acknowledgements. The installed
+`share/doc/ext4fuse-writer/DURABILITY.md` explains the oracles, reproduction commands,
+assumptions and remaining hardware/host power-loss qualification.
+
+These are software qualification improvements. They do not certify real power loss,
+add unsupported ext4 features, or replace the external recovery log with JBD2.
