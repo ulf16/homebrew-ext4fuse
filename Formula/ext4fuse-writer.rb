@@ -19,9 +19,9 @@ end
 class Ext4fuseWriter < Formula
   desc "Managed ext4 write mounts with explicit transaction recovery"
   homepage "https://github.com/ulf16/ext4fuse"
-  url "https://github.com/ulf16/ext4fuse/archive/cc9cb2cc3ada617d617dc0b1a962b0da9fbf4b59.tar.gz"
-  version "0.3.0-beta.8"
-  sha256 "6cfc8a42575555155d0d30dd3307ce69816d6204f294684fd59ae4cf6bbfe587"
+  url "https://github.com/ulf16/ext4fuse/archive/9a9cb38048680c0733ec6a2e623bb11cbfc857db.tar.gz"
+  version "0.3.0-beta.9"
+  sha256 "021fbc860f13af8c824d9581e5bc3c1f71fba184ebf85574929dea1bcd74e205"
   license "GPL-2.0-only"
 
   env :std
@@ -55,6 +55,7 @@ class Ext4fuseWriter < Formula
       Remember initialized volumes for background mounting and checked OS ejection:
         ext4fuse-writer volume add NAME --state STATE --mountpoint MOUNTPOINT
         ext4fuse-writer volume mount NAME
+        ext4fuse-writer volume status NAME --watch
         ext4fuse-writer volume eject NAME
       Use volume unmount NAME to leave the device connected, or volume recover NAME after interruption.
       Profiles use stable device identity; keep commands under the same owner as initialization.
