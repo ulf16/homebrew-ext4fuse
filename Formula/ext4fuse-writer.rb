@@ -19,9 +19,9 @@ end
 class Ext4fuseWriter < Formula
   desc "Managed ext4 write mounts with explicit transaction recovery"
   homepage "https://github.com/ulf16/ext4fuse"
-  url "https://github.com/ulf16/ext4fuse/archive/7e984d5f94783f4e87f7a7cab8879a21226b83fe.tar.gz"
-  version "0.3.0-beta.4"
-  sha256 "f8a3beb398f2958883c43c97d5bff5070f171a798b5b5de700b14385ae531a7b"
+  url "https://github.com/ulf16/ext4fuse/archive/506e7fcae3f562606deebadc94b02da4658e1b6f.tar.gz"
+  version "0.3.0-beta.5"
+  sha256 "da3ecc2876799f0af0033fe477cdb7883d0a993a9ea175b9c01d7c99e56e00e8"
   license "GPL-2.0-only"
 
   env :std
@@ -53,6 +53,8 @@ class Ext4fuseWriter < Formula
         ext4fuse-writer unmount /path/to/new-state
       After interruption, detach any stale mount and run ext4fuse-writer recover STATE.
       Device mode requires an explicitly selected offline partition and off-device state.
+      Full-volume checks report progress; wait for the checked unmount confirmation.
+      Other partitions on the same USB device must also be unused before disconnecting.
       Preserve the entire state directory until device recovery and clean unmount finish.
       See #{share}/doc/ext4fuse-writer/WORKFLOW.md for the complete workflow and limits.
     EOS
